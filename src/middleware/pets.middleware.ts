@@ -13,3 +13,15 @@ export const validateNumericId = (
   }
 }
 
+export const pleaseAuth = (
+  req:Request<{}, unknown, {}, {password?:string}>,
+  res:Response<{message:string}>,
+  next:NextFunction
+) => {
+  const {password} = req.query
+  if (password === 'please'){
+    next()
+  } else {
+    res.status(401).json({message: "Unauthorised. You must say please'"})
+  }
+}
